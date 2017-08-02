@@ -2,6 +2,8 @@ package com.king.control
 {
 	import com.king.events.PlayEvent;
 	
+	import flash.net.SharedObject;
+	
 	import fl.video.FLVPlayback;
 	import fl.video.VideoEvent;
 	import fl.video.VideoScaleMode;
@@ -14,6 +16,11 @@ package com.king.control
 		public function VideoControl($wid:int,$heg:int,$isloop:Boolean,$getTime:Boolean=false)
 		{
 			super();
+			Data.localData=SharedObject.getLocal(Data.localname);
+			if(Data.localData.data["videoVolume"]){
+				videoVolume=Data.localData.data["videoVolume"];
+			}
+			volume=videoVolume;
 			_isloop=$isloop;
 			autoPlay=true;
 			width=$wid;
@@ -65,7 +72,7 @@ package com.king.control
 					this.activeVideoPlayerIndex=1;
 					this.visibleVideoPlayerIndex=1;
 				}
-				volume=this.volume;
+				volume=videoVolume;
 				play();
 			}
 			else{
@@ -73,10 +80,12 @@ package com.king.control
 			}
 			
 		}
-		
 		override public function set volume(vol:Number):void
 		{
 			// TODO Auto Generated method stub
+			Data.localData.data["videoVolume"]=vol;
+			Data.localData.flush();
+			videoVolume=vol;
 			super.volume = vol;
 		}
 		
