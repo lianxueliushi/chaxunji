@@ -9,6 +9,7 @@ package
 		public static var stageHeight:Number=1080;
 		public static var localData:SharedObject;
 		public static var bgMusicVolume:Number=0.3;//背景音乐全局音量
+		public static const localname:String="LocalData_King";
 		public function Data()
 		{
 			

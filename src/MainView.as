@@ -2,13 +2,14 @@ package
 {
 	import com.king.control.KingView;
 	import com.king.control.Navigator;
+	import com.king.control.VideoControl;
 	import com.king.dispatchers.KingDispatcher;
 	import com.king.events.NavigatorEvent;
 	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
-	import flash.media.Video;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
 	import flash.utils.Timer;
@@ -25,9 +26,24 @@ package
 			backTimer.start();
 			stage.addEventListener(KeyboardEvent.KEY_UP,showMouse);
 			KingDispatcher.getInstance().addEventListener(NavigatorEvent.ADD_VIEW,addView);
+			KingDispatcher.getInstance().addEventListener(NavigatorEvent.REMOVE_VIEW,removeView);
+			KingDispatcher.getInstance().addEventListener(NavigatorEvent.BACK_VIEW,timeComplete);
+			stage.addEventListener(MouseEvent.CLICK,onStageClick);
 		}
 		
-		protected function timeComplete(event:TimerEvent):void
+		protected function onStageClick(event:MouseEvent):void
+		{
+			// TODO Auto-generated method stub
+			resetTimer();
+		}
+		
+		protected function removeView(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			Navigator.getInstance().removeView();
+		}
+		
+		protected function timeComplete(event:TimerEvent=null):void
 		{
 			// 计时结束回到默认页面
 			backTimer.stop();
@@ -51,9 +67,9 @@ package
 			backTimer.reset();
 			backTimer.start();
 		}
-		protected function addView(event:Event):void
+		protected function addView(event:NavigatorEvent):void
 		{
-			// TODO Auto-generated method stub
+			// 具体方法由子类实现
 			
 		}
 	}
