@@ -8,7 +8,7 @@ package com.king.events
 		public static const ADD_VIEW:String="NavigatorAddView";
 		public static const REMOVE_VIEW:String="NavigatorRemoveView";
 		public static const BACK_VIEW:String="NavigatorBackView";//返回首页
-		public function NavigatorEvent(type:String,$data:*, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function NavigatorEvent(type:String,$data:*=null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			_data=$data;
 			super(type, bubbles, cancelable);

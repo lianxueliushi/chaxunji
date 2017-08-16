@@ -7,7 +7,7 @@ package com.king.events
 		private var _data:*;
 		public static const GET_VIDEO_TIME:String="GetVideoTime";
 		public static const PLAY_OVER:String="PlayOver";
-		public function PlayEvent(type:String,$data:*,bubbles:Boolean=false, cancelable:Boolean=false)
+		public function PlayEvent(type:String,$data:*=null,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			_data=$data;
 			super(type, bubbles, cancelable);
