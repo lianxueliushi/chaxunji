@@ -31,10 +31,9 @@ package com.king.component
 			_wid=$wid;
 			_heg=$heg;
 			_lable=$lable;
-			onCreate();
 		}
 		
-		override public function onCreate():Boolean
+		override public function onCreate():void
 		{
 			// TODO Auto Generated method stub
 			_bg=new Shape();
@@ -53,13 +52,12 @@ package com.king.component
 			_txt.setTextFormat(tf);
 			this.addChild(_txt);
 			
-			
 			_ms=new Shape();
 			autoSize();
 			_txt.mouseEnabled=false;
 			this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDown);
 			this.addEventListener(MouseEvent.MOUSE_UP,mouseUp);
-			return super.onCreate();
+			super.onCreate();
 		}
 		private function autoSize():void{
 			_ms.graphics.clear();
@@ -131,7 +129,6 @@ package com.king.component
 			_lable = value;
 			_txt.text=_lable;
 		}
-		
 		public function set upSkin(value:Bitmap):void
 		{
 			_upSkin = value;
