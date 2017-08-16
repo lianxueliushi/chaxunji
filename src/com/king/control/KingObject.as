@@ -1,5 +1,8 @@
 package com.king.control
 {
+	/**
+	* @author Administrator
+	*/
 	public interface KingObject
 	{
 		/**
@@ -7,9 +10,7 @@ package com.king.control
 		 * @param target
 		 * 
 		 */		
-		function onCreate():Boolean;
-		function onReStart():Boolean;
-		function onPause():Boolean;
-		function onDispose():Boolean;
+		function onCreate():void;
+		function onDispose():void;
 	}
 }

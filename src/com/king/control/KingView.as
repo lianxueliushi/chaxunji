@@ -5,7 +5,7 @@ package com.king.control
 	public class KingView extends ViewObject
 	{
 		private var _bgColor:int;
-		private var _bg:Sprite;
+		protected var _bg:Sprite;
 		private var _addAble:Boolean;//是否可以添加界面，如果可添加界面，则添加后暂停程序，如果不可添加界面，则，添加后删除当前界面
 		public function KingView($add:Boolean=true,$name:String="KingView")
 		{
@@ -23,14 +23,24 @@ package com.king.control
 			_bg.graphics.endFill();
 		}
 		
-		override public function onDispose():Boolean
+		override public function onDispose():void
 		{
 			// TODO Auto Generated method stub
 			_bg.graphics.clear();
-			return super.onDispose();
+			super.onDispose();
 		}
 		
-		
+		public function onPause():void
+		{
+			// TODO Auto Generated method stub
+			trace(this.myname+"暂停");
+		}
+		public function onReStart():void
+		{
+			// TODO Auto Generated method stub
+			trace(this.myname+"重新开始");
+			
+		}
 		public function get addAble():Boolean
 		{
 			return _addAble;

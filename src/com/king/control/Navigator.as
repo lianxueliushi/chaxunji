@@ -15,7 +15,7 @@ package com.king.control
 		public static function getInstance():Navigator{
 			return _instance;
 		}
-		public  function addView($view:KingView):void{
+		public function addView($view:KingView):void{
 			this.addChild($view);
 			$view.alpha=1;
 			TweenMax.from($view,0.6,{alpha:0});
