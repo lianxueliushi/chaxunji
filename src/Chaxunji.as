@@ -1,25 +1,44 @@
 package
 {
-	import com.bit101.components.HScrollBar;
-	import com.bit101.components.Label;
-	import com.bit101.components.Panel;
-	import com.bit101.components.PushButton;
-	import com.king.component.ImgContainer;
-	import com.king.component.SkinButton;
+	import com.king.component.PictureTransition;
+	import com.king.component.TxtContainer;
+	import com.king.control.FileControl;
+	import com.king.control.Navigator;
 	
-	import flash.display.Bitmap;
-	import flash.text.TextFormat;
+	import flash.events.Event;
+	import flash.utils.setTimeout;
+	
 
+	[SWF(width="1920",height="1080")]
 	public class Chaxunji extends MainView
 	{
-		[Embed(source="assets/一级按钮.png")]
-		private var UpSkin:Class;
-		[Embed(source="assets/二级按钮.png")]
-		private var DownSkin:Class;
+		private var i:int;
+		private var imgList:Array=[];
+		private var urlList:Array=[];
 		public function Chaxunji()
 		{
-			var img:ImgContainer=new ImgContainer("assets/一级按钮.png");
-			this.addChild(img);
+			super();
+			
 		}
+		override protected function oninit(event:Event):void
+		{
+			// TODO Auto Generated method stub
+			super.oninit(event);
+			imgList=FileControl.getImgFileDirs("assets/");
+			var leftBtn:UI_btnLeft=new UI_btnLeft();
+			var rightBtn:UI_btnLeft=new UI_btnLeft();
+			var pics:PictureTransition=new PictureTransition(600,400,imgList,leftBtn,rightBtn);
+			Navigator.getInstance().addChild(pics);
+			var txt:TxtContainer=new TxtContainer(500,400,"assets/44.txt");
+			Navigator.getInstance().addChild(txt);
+			setTimeout(remove,3000);
+			
+			function remove():void{
+				Navigator.getInstance().removeChild(pics);
+			}
+			
+		}
+		
+		
 	}
 }

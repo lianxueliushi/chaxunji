@@ -1,8 +1,9 @@
 package
 {
+	import com.king.component.VideoContainer;
+	import com.king.control.BgMusicControl;
 	import com.king.control.KingView;
 	import com.king.control.Navigator;
-	import com.king.control.VideoControl;
 	import com.king.dispatchers.KingDispatcher;
 	import com.king.events.NavigatorEvent;
 	
@@ -20,7 +21,13 @@ package
 		public function MainView($add:Boolean=true, $name:String="MainView")
 		{
 			super($add, $name);
-			Mouse.hide();
+		}
+		
+		protected function oninit(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			Data.stageWidth=stage.stageWidth;
+			Data.stageHeight=stage.stageHeight;
 			backTimer=new Timer(Data.backTime,1);
 			backTimer.addEventListener(TimerEvent.TIMER_COMPLETE,timeComplete);
 			backTimer.start();
@@ -29,7 +36,22 @@ package
 			KingDispatcher.getInstance().addEventListener(NavigatorEvent.REMOVE_VIEW,removeView);
 			KingDispatcher.getInstance().addEventListener(NavigatorEvent.BACK_VIEW,timeComplete);
 			stage.addEventListener(MouseEvent.CLICK,onStageClick);
+			BgMusicControl.getInstance().source=Data.bgMusicUrl;
+			BgMusicControl.getInstance().volume=Data.bgMusicVolume;
+			this.addChild(Navigator.getInstance());
 		}
+		
+		override public function onCreate():void
+		{
+			// TODO Auto Generated method stub
+			Mouse.hide();
+			var pwd:UsePWD=new UsePWD();
+			this.addChild(pwd);
+			pwd.addEventListener("onCreate",oninit);
+			pwd.beginCheck();
+			super.onCreate();
+		}
+		
 		
 		protected function onStageClick(event:MouseEvent):void
 		{
@@ -47,7 +69,7 @@ package
 		{
 			// 计时结束回到默认页面
 			backTimer.stop();
-			if(Navigator.getInstance().latestView is VideoControl){
+			if(Navigator.getInstance().latestView is VideoContainer){
 				resetTimer();
 				return ;
 			}
