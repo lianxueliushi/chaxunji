@@ -23,11 +23,11 @@ package com.king.control
 			_bg.graphics.endFill();
 		}
 		
-		override public function onDispose():void
+		override protected function onEnd():void
 		{
 			// TODO Auto Generated method stub
 			_bg.graphics.clear();
-			super.onDispose();
+			super.onEnd();
 		}
 		
 		public function onPause():void

@@ -7,6 +7,7 @@
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import ui.UDbtn;
@@ -162,8 +163,12 @@
 				this.addChild(udBtn);
 				udBtn.x=_mask.width-20;
 				udBtn.y=_mask.height-40;
-				udBtn.btn_up.addEventListener(MouseEvent.CLICK,onUp);
-				udBtn.btn_down.addEventListener(MouseEvent.CLICK,onDown);
+				/*udBtn.btn_up.addEventListener(MouseEvent.CLICK,onUp);
+				udBtn.btn_down.addEventListener(MouseEvent.CLICK,onDown);*/
+				udBtn.btn_up.addEventListener(MouseEvent.MOUSE_DOWN,downHandler);
+				udBtn.btn_down.addEventListener(MouseEvent.MOUSE_DOWN,downHandler);
+				udBtn.btn_down.addEventListener(MouseEvent.MOUSE_UP,mouseUHandler);
+				udBtn.btn_up.addEventListener(MouseEvent.MOUSE_UP,mouseUHandler);
 				udBtn.visible=true;
 			}
 		}
@@ -174,14 +179,35 @@
 					this.addChild(udBtn);
 					udBtn.x=_mask.width-20;
 					udBtn.y=_mask.height-40;
-					udBtn.btn_up.addEventListener(MouseEvent.CLICK,onUp);
-					udBtn.btn_down.addEventListener(MouseEvent.CLICK,onDown);
+				/*	udBtn.btn_up.addEventListener(MouseEvent.CLICK,onUp);
+					udBtn.btn_down.addEventListener(MouseEvent.CLICK,onDown);*/
+					udBtn.btn_up.addEventListener(MouseEvent.MOUSE_DOWN,downHandler);
+					udBtn.btn_down.addEventListener(MouseEvent.MOUSE_DOWN,downHandler);
+					udBtn.btn_down.addEventListener(MouseEvent.MOUSE_UP,mouseUHandler);
+					udBtn.btn_up.addEventListener(MouseEvent.MOUSE_UP,mouseUHandler);
 				}
 				else udBtn.visible=true;
 			}
 			else{
 				if(udBtn!=null) udBtn.visible=false;
 			}
+		}
+		private var _speed:int=10;
+		private function downHandler(e:MouseEvent):void{
+			if(e.currentTarget==udBtn.btn_up){
+				_speed=10;
+			}
+			else _speed=-10;
+			this.addEventListener(Event.ENTER_FRAME,moveContent)
+		}
+		private function mouseUHandler(e:MouseEvent):void{
+			this.removeEventListener(Event.ENTER_FRAME,moveContent)
+		}
+		protected function moveContent(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			_y+=_speed;
+			moveEndSetRongqi();
 		}
 		protected function onUp(event:MouseEvent):void
 		{

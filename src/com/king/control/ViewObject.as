@@ -11,6 +11,9 @@ package com.king.control
 	 * 一个拥有2个状态的sprite 
 	 * 在被添加的时候，onCreate();
 	 * 在被移除的时候，onDispose();
+	 * onCreate()调用onInit()区别就是权限不同
+	 * onDispose()调用onEnd()区别就是权限不同
+	 * 
 	 * 
 	 * @author Administrator
 	 * 
@@ -25,7 +28,6 @@ package com.king.control
 			_myname=$name;
 			this.addEventListener(Event.ADDED_TO_STAGE,addedToView);
 		}
-		
 		public function addChildByPosition($child:DisplayObject,$x:Number,$y:Number):void{
 			this.addChild($child);
 			$child.x=int($x);
@@ -39,29 +41,26 @@ package com.king.control
 			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromView);
 			onCreate();
 		}
-		
-		override public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
-		{
-			// TODO Auto Generated method stub
-			_listeners.push({type:type,listener:listener});
-			super.addEventListener(type, listener, useCapture, priority, useWeakReference);
-		}
-		
 		protected function removeFromView(event:Event):void
 		{
 			// TODO Auto-generated method stub
 			this.removeEventListener(Event.REMOVED_FROM_STAGE,removeFromView);
-			onDispose();
+			onEnd();
 		}
-		
 		public function onCreate():void
 		{
 			// TODO Auto Generated method stub
-//			trace(this.myname+"被创建");
+			onInit();
+		}
+		protected function onInit():void{
+			trace(this.myname+"被创建");
 		}
 		public function onDispose():void
 		{
 			// TODO Auto Generated method stub
+			onEnd();
+		}
+		protected function onEnd():void{
 			while(_listeners.length>0){
 				var listener:Object=_listeners.pop();
 				removeEventListener(listener.type,listener.listener);
@@ -73,7 +72,7 @@ package com.king.control
 				{
 					var child:*=this.removeChildAt(0);
 					trace("onDispose:"+child.name);
-					if(child is ViewObject){
+					if(child is KingObject){
 						child.onDispose();
 					}
 					else if(child is Bitmap){
@@ -95,11 +94,15 @@ package com.king.control
 			this.graphics.clear();
 			trace(this.myname+"被销毁:");
 		}
-
 		public function get myname():String
 		{
 			return _myname;
 		}
-
+		override public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		{
+			// TODO Auto Generated method stub
+			_listeners.push({type:type,listener:listener});
+			super.addEventListener(type, listener, useCapture, priority, useWeakReference);
+		}
 	}
 }
