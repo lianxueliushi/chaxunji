@@ -33,7 +33,7 @@ package com.king.component
 			_lable=$lable;
 		}
 		
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			_bg=new Shape();
@@ -57,7 +57,6 @@ package com.king.component
 			_txt.mouseEnabled=false;
 			this.addEventListener(MouseEvent.MOUSE_DOWN,mouseDown);
 			this.addEventListener(MouseEvent.MOUSE_UP,mouseUp);
-			super.onCreate();
 		}
 		private function autoSize():void{
 			_ms.graphics.clear();

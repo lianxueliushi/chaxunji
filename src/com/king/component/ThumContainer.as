@@ -44,18 +44,17 @@ package com.king.component
 			this.graphics.drawRect(-2,-2,_wid+4,_heg+4);
 			this.graphics.endFill();
 		}
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			if(_source){
 				load();
 			}
-			super.onCreate();
 		}
-		override public function onDispose():void
+		override protected function onEnd():void
 		{
 			// TODO Auto Generated method stub
-			super.onDispose();
+			super.onEnd();
 			if(_loader!=null){
 				_loader.dispose(true);
 				_loader=null;

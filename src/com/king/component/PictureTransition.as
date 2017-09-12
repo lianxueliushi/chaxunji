@@ -83,7 +83,7 @@ package com.king.component
 			}
 		}
 		
-		override public function onDispose():void
+		override protected function onEnd():void
 		{
 			// TODO Auto Generated method stub
 			this.removeChild(_imgContainer);
@@ -100,10 +100,10 @@ package com.king.component
 			}
 			if(_leftBtn) _leftBtn.removeEventListener(MouseEvent.CLICK,btnClick);
 			if(_rightBtn) _rightBtn.removeEventListener(MouseEvent.CLICK,btnClick);
-			super.onDispose();
+			super.onEnd();
 		}
 		
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			if(_imgFileList==null || _imgFileList.length==0){
@@ -125,7 +125,6 @@ package com.king.component
 				_rightBtn.y=(_heg-_leftBtn.height>>1)+38;
 				addChild(_rightBtn);
 			}
-			super.onCreate();
 		}
 		
 		

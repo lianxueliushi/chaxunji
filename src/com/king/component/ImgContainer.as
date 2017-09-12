@@ -32,27 +32,24 @@ package com.king.component
 			this.graphics.endFill();
 		}
 		
-		override public function onCreate():void
+		
+		override protected function onEnd():void
+		{
+			// TODO Auto Generated method stub
+			if(_loader!=null){
+				_loader.dispose(true);
+				_loader=null;
+			}
+			super.onEnd();
+		}
+		
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			if(_source){
 				load();
 			}
-			super.onCreate();
 		}
-		
-		override public function onDispose():void
-		{
-			// TODO Auto Generated method stub
-			super.onDispose();
-			if(_loader!=null){
-				_loader.dispose(true);
-				_loader=null;
-			}
-			removeImg();
-		}
-		
-		
 		public function set source($url:File):void{
 			_source=$url;
 		}

@@ -4,12 +4,11 @@ package com.king.component
 	import com.greensock.easing.Circ;
 	import com.king.control.ViewObject;
 	
-	import flash.display.Sprite;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-	public class Prompt extends com.king.control.ViewObject
+	public class Prompt extends ViewObject
 	{
 		/**
 		 *提示信息 
@@ -28,7 +27,7 @@ package com.king.component
 			super();
 		}
 		
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			_busyBg=new ViewObject();
@@ -48,7 +47,6 @@ package com.king.component
 			_biMessage.height=_biMessage.textHeight+6;
 			_busyBg.addChild(_biMessage);
 			_biMessage.y=_heg-_biMessage.height>>1;
-			super.onCreate();
 		}
 		public function showMessage($str:String,$autoDispear:Boolean=false,delay:Number=2):void{
 			_biMessage.text=$str;

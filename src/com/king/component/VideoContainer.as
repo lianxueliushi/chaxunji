@@ -26,6 +26,7 @@ package com.king.component
 			if($getTime){
 				this.addEventListener(VideoEvent.PLAYHEAD_UPDATE,playingHandler);
 			}
+			this.addEventListener(VideoEvent.COMPLETE,playOver);
 		}
 		
 		protected function playingHandler(event:VideoEvent):void
@@ -75,7 +76,6 @@ package com.king.component
 			else{
 				this.dispatchEvent(new PlayEvent(PlayEvent.PLAY_OVER,null));
 			}
-			
 		}
 		override public function set volume(vol:Number):void
 		{

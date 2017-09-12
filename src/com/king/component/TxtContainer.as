@@ -39,15 +39,14 @@ package com.king.component
 			}
 			textView=new TextField();
 			textView.defaultTextFormat=_textFormat;
-			loader=new URLLoader();
-			loader.addEventListener(Event.COMPLETE,loadCom);
 			_url=$txtUrl;
 			super("TxtContainer");
 		}
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
-			super.onCreate();
+			loader=new URLLoader();
+			loader.addEventListener(Event.COMPLETE,loadCom);
 			loader.load(new URLRequest(_url));
 		}
 		protected function loadCom(event:Event):void
@@ -59,7 +58,9 @@ package com.king.component
 			textView.multiline=true;
 			textView.selectable=false;
 			textView.autoSize=TextFieldAutoSize.LEFT;
-			textView.text=event.target.data;
+			var str:String=event.target.data;
+			str=str.replace(/\r/gm,"");
+			textView.text=str;
 			textView.width=_wid;
 //			textView.height=textView.textHeight+5;
 			if(textView.height>_heg-20){

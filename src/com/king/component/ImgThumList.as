@@ -41,10 +41,9 @@ package com.king.component
 			_perPage=_col*_row;
 		}
 		
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
-			super.onCreate();
 			if(_imgList.length>0){
 				setPerPage();
 			}
@@ -82,10 +81,15 @@ package com.king.component
 			$img.source=$source;
 			$img.load();
 		}
-		public function clear():void{
+		
+		override protected function onEnd():void
+		{
+			// TODO Auto Generated method stub
 			_container.removeAll();
 			_tempList=[];
+			super.onEnd();
 		}
+		
 		public function set gapV(value:int):void
 		{
 			_gapV = value;
