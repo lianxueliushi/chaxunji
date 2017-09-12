@@ -6,7 +6,6 @@ package
 	import com.king.control.Navigator;
 	
 	import flash.events.Event;
-	import flash.utils.setTimeout;
 	
 
 	[SWF(width="1920",height="1080")]
@@ -20,10 +19,11 @@ package
 			super();
 			
 		}
-		override protected function oninit(event:Event):void
+		override protected function onPass(event:Event):void
 		{
 			// TODO Auto Generated method stub
-			super.oninit(event);
+			super.onPass(event);
+			
 			imgList=FileControl.getImgFileDirs("assets/");
 			var leftBtn:UI_btnLeft=new UI_btnLeft();
 			var rightBtn:UI_btnLeft=new UI_btnLeft();
@@ -31,12 +31,6 @@ package
 			Navigator.getInstance().addChild(pics);
 			var txt:TxtContainer=new TxtContainer(500,400,"assets/44.txt");
 			Navigator.getInstance().addChild(txt);
-			setTimeout(remove,3000);
-			
-			function remove():void{
-				Navigator.getInstance().removeChild(pics);
-			}
-			
 		}
 		
 		

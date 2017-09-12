@@ -23,7 +23,7 @@ package
 			super($add, $name);
 		}
 		
-		protected function oninit(event:Event):void
+		protected function onPass(event:Event):void
 		{
 			// TODO Auto-generated method stub
 			Data.stageWidth=stage.stageWidth;
@@ -41,15 +41,14 @@ package
 			this.addChild(Navigator.getInstance());
 		}
 		
-		override public function onCreate():void
+		override protected function onInit():void
 		{
 			// TODO Auto Generated method stub
 			Mouse.hide();
 			var pwd:UsePWD=new UsePWD();
 			this.addChild(pwd);
-			pwd.addEventListener("onCreate",oninit);
+			pwd.addEventListener("onCreate",onPass);
 			pwd.beginCheck();
-			super.onCreate();
 		}
 		
 		
